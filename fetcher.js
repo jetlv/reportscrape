@@ -22,7 +22,7 @@ var logger = new (winston.Logger)({
 });
 
 /** Configure request timeout and proixes if required*/
-rp = rp.defaults({proxy: 'http://127.0.0.1:1081', timeout: 30000});
+//rp = rp.defaults({proxy: 'http://127.0.0.1:1081', timeout: 30000});
 
 /** compose url by yourself */
 

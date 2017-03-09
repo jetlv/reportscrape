@@ -3,7 +3,7 @@ const url = require('url')
 const fetcher = require('./fetcher.js');
 
 /** default port is 3001 */
-const port = 3001
+const port = 3002
 /** 10000 as code wound be returned if request would not be completed successfully */
 const errorCode = 10000;
 /** 1 as code wound be returned if request completed well */
@@ -58,9 +58,9 @@ const requestHandler = (request, response) => {
 }
 
 
-const server = http.createServer(requestHandler)
+    const server = http.createServer(requestHandler)
 
-server.listen(port, (err) => {
+    server.listen(port, '127.0.0.1', (err) => {
     if (err) {
         return console.log('something bad happened', err)
     }

@@ -11,6 +11,8 @@ const correctCode = 1;
 /** driver store*/
 let allDrivers = [];
 let singleQuery = fetcher.singleQuery;
+let permissions = ['::1', '119.4.113.57', '2605:6000:8bcb:e000:5cc1:8462:f75f:a27c'];
+
 
 /**
  * Handle seo information
@@ -49,6 +51,16 @@ const reportHandler = (request, response) => {
 
 const requestHandler = (request, response) => {
     /** replace circle*/
+    let ip = request.connection.remoteAddress;
+    if (permissions.indexOf(ip) == -1) {
+        console.log(ip + ' bad request');
+        response.end(JSON.stringify({
+            code: errorCode,
+            message: 'You have no permission'
+        }));
+        return;
+    }
+
     let pathName = url.parse(request.url, true).pathname;
     if (pathName == '/report') {
         reportHandler(request, response);
@@ -58,11 +70,29 @@ const requestHandler = (request, response) => {
 }
 
 
-    const server = http.createServer(requestHandler)
+const server = http.createServer(requestHandler)
 
-    server.listen(port, '127.0.0.1', (err) => {
+server.listen(port, (err) => {
     if (err) {
         return console.log('something bad happened', err)
     }
     console.log(`scraper server is listening on ${port}`)
 })
+
+// const server1 = http.createServer(requestHandler)
+//
+// server1.listen(port, '119.4.113.57', (err) => {
+//     if (err) {
+//         return console.log('something bad happened', err)
+//     }
+//     console.log(`scraper server is listening on ${port}`)
+// })
+//
+// const server2 = http.createServer(requestHandler)
+//
+// server2.listen(port, '2605:6000:8bcb:e000:5cc1:8462:f75f:a27c', (err) => {
+//     if (err) {
+//         return console.log('something bad happened', err)
+//     }
+//     console.log(`scraper server is listening on ${port}`)
+// })

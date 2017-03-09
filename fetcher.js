@@ -133,7 +133,7 @@ function singleQuery(rd, date) {
                 return entity;
             }
         ).catch(function (err) {
-            logger.log('error', err + ' - ' + url);
+            logger.log('error', err + ' - ' + rd);
         });
 }
 

@@ -11,7 +11,7 @@ const correctCode = 1;
 /** driver store*/
 let allDrivers = [];
 let singleQuery = fetcher.singleQuery;
-let permissions = ['::ffff:1.82.229.8', '::ffff:76.185.78.250', '::ffff:127.0.0.1', '::ffff:184.168.20.153'];
+let permissions = ['::ffff:1.82.229.8', '::ffff:76.185.78.250', '::ffff:127.0.0.1', '::ffff:184.168.20.153','::ffff:104.224.191.78'];
 
 
 /**

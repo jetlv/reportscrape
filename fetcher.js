@@ -136,6 +136,7 @@ async function singleQuery(rd, date) {
     let month = date.split('-')[1];
     let day = date.split('-')[2];
     let rdDate = month + '/' + day + '/' + year    
+    let entity = {rd: rd, driverdata: {}};
     console.log('start working on ' + rd + ' - ' + month + '/' + day + '/' + year);
     let body = await getDriverInformationExchangeResponse(rd, rdDate)
     var $ = cheerio.load(body);

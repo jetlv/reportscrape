@@ -28,6 +28,13 @@ var logger = new (winston.Logger)({
 });
 
 
+const proxies = [`us-wa.proxymesh.com:31280`, `us-il.proxymesh.com:31280`, `us.proxymesh.com:31280`, `us-dc.proxymesh.com:31280`, `us-ca.proxymesh.com:31280`]
+
+function grabAnProxyServer() {
+    let random = Math.floor(Math.random() * proxies.length);
+    let proxy = `http://${proxies[random]}`
+    return proxy
+}
 
 async function subQuerySteps(page, rdNumber, date) {
     await page.goto(`https://crash.chicagopolice.org/DriverInformationExchange/home`);      

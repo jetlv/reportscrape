@@ -22,13 +22,14 @@ let permissions = ['::ffff:74.63.228.139','::ffff:74.63.249.3','::ffff:64.31.54.
  * @param request
  * @param response
  */
-const reportHandler = (request, response) => {
+const reportHandler = async (request, response) => { // 添加 async 关键字
     /** replace circle*/
-    var reqUrl = request.url
+    var reqUrl = request.url;
     /**  parse url */
     var queryObject = url.parse(reqUrl, true).query;
     var rd = queryObject.rd;
     var date = queryObject.date;
+    
     if (!rd) {
         response.end(JSON.stringify({
             code: errorCode,
@@ -36,6 +37,7 @@ const reportHandler = (request, response) => {
         }));
         return;
     }
+    
     if (!date) {
         response.end(JSON.stringify({
             code: errorCode,
@@ -43,13 +45,23 @@ const reportHandler = (request, response) => {
         }));
         return;
     }
-    singleQuery(rd, date).then(function (entity) {
+    
+    try {
+        const entity = await singleQuery(rd, date); // 使用 await 等待 singleQuery 的结果
         response.end(JSON.stringify({
             code: correctCode,
             info: entity
         }));
-    });
+    } catch (error) {
+        // 处理 singleQuery 抛出的错误
+        console.error('Error in singleQuery:', error);
+        response.end(JSON.stringify({
+            code: errorCode,
+            message: 'Error occurred while processing the query'
+        }));
+    }
 }
+
 
 
 const requestHandler = (request, response) => {

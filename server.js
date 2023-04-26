@@ -66,15 +66,15 @@ const reportHandler = async (request, response) => { // 添加 async 关键字
 
 const requestHandler = (request, response) => {
     /** replace circle*/
-    let ip = request.connection.remoteAddress;
-    if (permissions.indexOf(ip) == -1) {
-        console.log(ip + ' bad request');
-        response.end(JSON.stringify({
-            code: errorCode,
-            message: 'You have no permission'
-        }));
-        return;
-    }
+    // let ip = request.connection.remoteAddress;
+    // if (permissions.indexOf(ip) == -1) {
+    //     console.log(ip + ' bad request');
+    //     response.end(JSON.stringify({
+    //         code: errorCode,
+    //         message: 'You have no permission'
+    //     }));
+    //     return;
+    // }
 
     let pathName = url.parse(request.url, true).pathname;
     if (pathName == '/report') {
